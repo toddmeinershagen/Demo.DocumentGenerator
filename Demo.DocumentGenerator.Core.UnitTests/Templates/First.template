@@ -1,0 +1,4 @@
+﻿Name:  %Model.PatientFirstName% %Model.PatientLastName%
+Net Charges:  %Model.NetCharges; format="c"%
+Created Date:  %Model.CreatedDate; format="d"%
+Created Date (Formatted):  %Model.CreatedDate; format="dd.MM.yyyy HH:mm"%
