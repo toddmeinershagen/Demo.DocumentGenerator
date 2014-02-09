@@ -49,6 +49,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,14 +57,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdvancedRenderer.cs" />
-    <Compile Include="FileSystemService.cs" />
-    <Compile Include="IFileSystemService.cs" />
-    <Compile Include="ITemplateEngine.cs" />
+    <Compile Include="Engine\AdvancedRenderer.cs" />
+    <Compile Include="Engine\FileSystemService.cs" />
+    <Compile Include="Engine\IFileSystemService.cs" />
+    <Compile Include="Engine\ITemplateEngine.cs" />
+    <Compile Include="Converters\ObjectDictionaryConverter.cs" />
+    <Compile Include="Models\DocumentRequest.cs" />
+    <Compile Include="Models\Procedure.cs" />
+    <Compile Include="Procedure.cs" />
     <Compile Include="SerializerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StringTemplateEngine.cs" />
-    <Compile Include="TemplateService.cs" />
+    <Compile Include="Engine\StringTemplateEngine.cs" />
+    <Compile Include="Engine\TemplateService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

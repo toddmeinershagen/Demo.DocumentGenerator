@@ -2,3 +2,7 @@
 Net Charges:  %Model.NetCharges; format="c"%
 Created Date:  %Model.CreatedDate; format="d"%
 Created Date (Formatted):  %Model.CreatedDate; format="dd.MM.yyyy HH:mm"%
+Procedures:
+%Model.Procedures:{item |
+    %i%.  %item.Code% - %item.Description%
+}%
