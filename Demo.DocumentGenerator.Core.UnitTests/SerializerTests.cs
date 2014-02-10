@@ -1,42 +1,34 @@
-﻿using Newtonsoft.Json;
+﻿using Demo.DocumentGenerator.Core.UnitTests.Converters;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
-using Newtonsoft.Json.Converters;
 using System.Globalization;
 using Demo.DocumentGenerator.Core.UnitTests.Models;
 
 namespace Demo.DocumentGenerator.Core.UnitTests
 {
-    using System.Web.Script.Serialization;
-    using System.Collections.ObjectModel;
-    using System.Dynamic;
-    using System.Collections;
-    using Newtonsoft.Json.Linq;
-
     [TestFixture]
     public class SerializerTests
     {
-        private DateTimeOffset _createdDate = new DateTimeOffset(21.July(2014).AddHours(2));
-        private string jsonValue = "{\"TemplateName\":\"First\",\"Culture\":\"en-US\",\"Data\":{\"CreatedDate\":\"2014-07-21T02:00:00-05:00\",\"NetCharges\":125.50,\"PatientFirstName\":\"Todd\",\"PatientLastName\":\"Meinershagen\",\"Procedures\":[{\"Code\":\"CD1\",\"Description\":\"Leg amputation\"},{\"Code\":\"CD2\",\"Description\":\"Pace maker replacement\"}]}}";
+        private readonly DateTimeOffset _createdDate = new DateTimeOffset(21.July(2014).AddHours(2));
+        private const string jsonValue = "{\"TemplateName\":\"First\",\"Culture\":\"en-US\",\"Data\":{\"CreatedDate\":\"2014-07-21T02:00:00-05:00\",\"NetCharges\":125.50,\"PatientFirstName\":\"Todd\",\"PatientLastName\":\"Meinershagen\",\"Procedures\":[{\"Code\":\"CD1\",\"Description\":\"Leg amputation\"},{\"Code\":\"CD2\",\"Description\":\"Pace maker replacement\"}]}}";
 
         [TestFixtureSetUp]
         public void Init()
         {
             FactoryGirl.NET.FactoryGirl.Define(() =>
             {
-                var value = new Dictionary<string, object>();
-                value.Add("CreatedDate", _createdDate);
-                value.Add("NetCharges", 125.50m);
-                value.Add("PatientFirstName", "Todd");
-                value.Add("PatientLastName", "Meinershagen");
+                var value = new Dictionary<string, object>
+                    {
+                        {"CreatedDate", _createdDate},
+                        {"NetCharges", 125.50m},
+                        {"PatientFirstName", "Todd"},
+                        {"PatientLastName", "Meinershagen"}
+                    };
 
-                //var procedures = new [] { new { Code = "CD1", Description = "Leg amputation" }, new { Code = "CD2", Description = "Pace maker replacement" } };
-                var procedures = new Procedure[] { new Procedure{ Code = "CD1", Description = "Leg amputation" }, new Procedure{ Code = "CD2", Description = "Pace maker replacement" } };
+                var procedures = new[] { new Procedure{ Code = "CD1", Description = "Leg amputation" }, new Procedure{ Code = "CD2", Description = "Pace maker replacement" } };
                 value.Add("Procedures", procedures);
 
                 return new DocumentRequest{ TemplateName = "First", Culture = "en-US", Data = value };

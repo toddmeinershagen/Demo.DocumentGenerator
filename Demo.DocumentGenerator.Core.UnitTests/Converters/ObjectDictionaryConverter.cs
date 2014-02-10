@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Demo.DocumentGenerator.Core.UnitTests
+namespace Demo.DocumentGenerator.Core.UnitTests.Converters
 {
     public class ObjectDictionaryConverter : CustomCreationConverter<IDictionary<string, object>>
     {
@@ -33,10 +30,9 @@ namespace Demo.DocumentGenerator.Core.UnitTests
             if (reader.TokenType == JsonToken.StartObject || reader.TokenType == JsonToken.Null)
                 return base.ReadJson(reader, objectType, existingValue, serializer);
 
-            if (reader.TokenType == JsonToken.StartArray)
-                return serializer.Deserialize<List<dynamic>>(reader);
-
-            return serializer.Deserialize(reader);
+            return reader.TokenType == JsonToken.StartArray ? 
+                serializer.Deserialize<List<dynamic>>(reader) : 
+                serializer.Deserialize(reader);
         }
     }
 }
